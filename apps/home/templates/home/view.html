@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Trip</title>
+</head>
+<body>
+    <h1>Hello Jon! These are the trip details!</h1>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
+    <h3>{{ trip.destination }}</h3>
+    <div>
+        <p>Start Date:{{ trip.startdate }}</p>
+        <p>End Date: {{trip.enddate}}</p>
+        <p>Created on: {{ trip.created_at }}</p>
+        <p>Last Updated on: {{ trip.updated_at }}</p>
+        <p>Plan: {{ trip.plan }}</p>
+        <p>Posted by: {{trip.planner.f_name}}</p>        
+    </div>
+    <div>
+        <h3>People who've joined the trip:</h3>
+        {% for follower in followers %}
+            {% if follower.id != trip.planner.id %}
+            <p>{{ follower.f_name }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

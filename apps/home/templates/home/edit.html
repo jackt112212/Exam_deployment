@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit</title>
+</head>
+<body>
+     {% if messages %}
+    <ul>
+        {%for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Hello {{ user.f_name }}! Let's edit your trip!</h1>
+    <form action="/process_edit_trip/{{ trip.id }}" method="POST">
+        {% csrf_token %}
+        <label for="destination">Destination</label>
+        <input type="text" name="destination" value="{{ trip.destination }}">        
+        <label for="startdate">Start Date</label>
+        <input type="date" name="startdate" value="{{ trip.startdate|date:'Y-m-d' }}">
+        <label for="enddate">End Date</label>
+        <input type="date" name="enddate" value="{{ trip.enddate|date:'Y-m-d' }}">
+        <label for="plan">Plan</label>
+        <textarea name="plan" cols="30" rows="10">{{ trip.plan }}</textarea>  
+        <a href="/dashboard"><input type="button" name="Cancel" value="Cancel"></a>      
+        <button type="submit">Submit</button>
+    </form>    
+</body>
+</html>
